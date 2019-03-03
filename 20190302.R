@@ -46,4 +46,30 @@ mtcars_10 <- head(mtcars,10) %>% print()
 spread(mtcars_10, gear, mpg)
 
 #separate(데이터, 분리할 칼럼명, 분리되는 신규 칼럼명) /칼럼안데이터분리
+mtcars_name <- data.frame(Names = rownames(mtcars)); mtcars_name
+result <- separate(mtcars_name, Names, c("A", "B"), sep=" ",fill = 'right'
+                   , extra = 'merge');result
 
+
+#Unite(데이터, 합쳐져 새로 생성될 칼럼명, 합칠 칼럼명1, 합칠칼럼명2)
+mtcars_name<- unite(result, Names,A,B,sep=" ");mtcars_name
+
+#개체추출
+#filter(데이터, 조건)
+filter(tbl_iris, Species=='versicolor')
+
+#특정행의 개체 추출 slice(데이터, 조건)
+slice(tbl_iris,6:15)
+
+#필요한 열만 선택하기
+#select()  sql쿼리문 처럼 필요한 칼럼만 선택
+select(tbl_iris, Sepal.Length, Sepal.Width, Petal.Length, Petal.Width)
+#select도우미함수 p.136
+select(tbl_iris, starts_with("S"))
+
+vars <- c("Sepal.Length", "Petal.Length")
+select(tbl_iris, one_of(vars))
+
+tbl_iris2 <- tbl_iris
+colnames(tbl_iris2) <- sprintf("x%d",1:5)
+tbl_iris2
