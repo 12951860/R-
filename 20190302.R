@@ -73,3 +73,36 @@ select(tbl_iris, one_of(vars))
 tbl_iris2 <- tbl_iris
 colnames(tbl_iris2) <- sprintf("x%d",1:5)
 tbl_iris2
+
+
+select_if(tbl_iris, is.double)#데이터 타입 선택
+
+###데이터 조합하기(열기준)
+x<- data.frame(A=c('a','b','c'),B=c('t','u','v'),C=c(1,2,3),stringsAsFactors=F)
+y<-data.frame(A=c('a','b','c'),B=c('t','u','w'),D=c(3,2,1),stringsAsFactors=F)
+bind_cols(x,y)#데이터를 오른쪽에 붙혀줌
+
+#left_join()은 왼쪽 데이터 기준으로 조건에 맞게 오른쪽 데이터를 합침
+#left_join(데이터1,데이터2,by='기준칼럼')
+left_join(x,y,by=c('A','B'))
+right_join(x,y,by=c('A','B'))
+inner_join(x,y,by=c('A','B'))
+full_join(x,y,by=c('A','B'))
+
+###데이터 조합하기(행기준)
+x<-data.frame(A=c('a','b','c'),B=c('t','u','v'),C=c(1,2,3),stringsAsFactors=F)
+y<-data.frame(A=c('a','b','c'),B=c('t','u','w'),C=c(1,2,4),stringsAsFactors=F)
+x
+y
+bind_rows(x,y)
+intersect(x,y) #inner_join과 개념이 같음
+setdiff(x,y)#일치하지 않은 행
+union(x,y)
+#mutate()는 칼럼값을 조합하거나 계산하여 새로운 칼럼을 생성하는 함수이다
+#mutate(데이터, 신규 칼럼명= 조합식 또는 계산식)
+tbl_iris
+mutate(tbl_iris, SepalLengthAndWidth=Sepal.Length*Sepal.Width)
+
+#transmute()는 mutate()에서 새로생긴 칼럼으로 새로운 데이터셋만듦
+transmute(tbl_iris,SepalLengthAndWidth=Sepal.Length*Sepal.Width)
+
