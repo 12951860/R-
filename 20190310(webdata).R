@@ -24,3 +24,25 @@ data2 <- fromJSON("https://api.github.com/users/hadley/orgs")
 data2 <- as.data.frame(data2)
 colnames(data2)
 View(data2)
+
+
+data<-fromJSON("D:/R/전국초등학교통학구역표준데이터.json")
+names(data)
+data<-as.data.frame(data$records)
+View(data)
+
+install.packages(c("readr","pool","dplyr","dbplyr","RSQLServer"))
+library(readr)
+library(pool)
+library(dplyr)
+library(dbplyr)
+library(RSQLServer)
+install.packages("RSQLServer")#설치가 안 되는 오류 해결 바람
+NHIS_OPEN_GJ_2015 <- read_csv("D:\\R\\NHIS_OPEN_GJ_2015.csv",locale=locale(encoding="euc-kr"))
+data <- NHIS_OPEN_GJ_2015[1:100,1:7]
+colnames <- c("Year","UID","Sex","Age","CityCode","height","weight")
+con <- dbPool(RSQLServer::SQLServer(),server="test.database.windows.net",
+              database="test_server",properties=list(user=" 0000 ",password="0000000"))
+dbListTables(con)
+dbWriteTable(con,"NHIS_OPEN_GJ_2015",data,overwrite=T,row.names=T)
+dbReadTable(con, "NHIS_OPEN_GJ_2015")
