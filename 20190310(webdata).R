@@ -46,3 +46,48 @@ con <- dbPool(RSQLServer::SQLServer(),server="test.database.windows.net",
 dbListTables(con)
 dbWriteTable(con,"NHIS_OPEN_GJ_2015",data,overwrite=T,row.names=T)
 dbReadTable(con, "NHIS_OPEN_GJ_2015")
+
+#R내장데이터셋보기
+data()
+
+
+#빅데이터 약간
+data <- data.frame(number=rnorm(n=100000000))
+dim(data)
+#저장속도비교
+system.time({
+  save(data, file="data.RData")
+})
+
+library(readr)
+system.time({
+  write_csv(data, "data.csv")
+})
+
+library(feather)#나중에 확인할 것 
+system.time({
+  write_feather(data, "data.feather")
+})
+
+install.packages('fst')
+library(fst)
+system.time({
+  write.fst(data, "data.fst")
+})
+
+#읽기속도 비교
+system.time({
+  load("data.RData")
+})
+
+system.time({
+  data1 <- read_csv("data.csv")
+})
+
+system.time({
+  data <- read_feather("data.feather")
+})
+
+system.time({
+  data3 <- read.fst("data.fst")
+})
