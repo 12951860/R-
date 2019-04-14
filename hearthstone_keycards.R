@@ -27,7 +27,7 @@ wmcp <- function(wants=1,twocards=0,M=0,coin=F){
     return(y)
 }
 
-#ex) Chance to do kele-shadow-kele on first turn of first player
+#ex) Chance to do kele-shadow-kele on first turn of second player
 wmcp(2,1,3)
 #(3 cards mulligan); 8.86%
 
