@@ -27,9 +27,9 @@ wmcp <- function(wants=1,twocards=0,M=0,coin=F){
     return(y)
 }
 
-#ex) Chance to do kele-shadow-kele on first turn of second player
-wmcp(2,1,3)
-#(3 cards mulligan); 8.86%
+#ex) Chance to do coin-kele-shadow-kele on first turn of second player
+wmcp(2,1,4,T)
+#(4 cards mulligan); 14.63%
 
 #ex2) 하수인 법사 선턴일 때 3턴 신비한 지능,4턴 산거,5턴 카드가,창조술사
 wmcp(1,1,3)
