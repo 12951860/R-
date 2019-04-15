@@ -38,14 +38,20 @@ k=1
 #ex)Enemy minion HP=1,3//use Cinderstorm//kill HP3 minion?
 clean(5,c(30,1,3),target = 3)
 #33.53%
+
 #ex)Enemy minion HP=1,3//use Cinderstorm//kill 2 minion?
 clean(5,c(30,4),target=2)
 #18.56%
+
+#ex)Enemy minion HP=1,3//use Cinderstorm//all hit enemy hero?
+clean(5,c(5,1,3),target=1)
+#0.42%
 
 #ex2)enemy minion HP=8,4//my minion HP=5//use Volcano
 #//The probability of my minion surviving.
 1-clean(15,c(8,4,5),3)
 #24.7%
+
 #//The probability of my minion only surviving.
 clean(15,c(12,5),1)
 #1.77%
